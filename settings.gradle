@@ -1,0 +1,4 @@
+rootProject.name = 'mk-admin-assistent'
+include 'domain'
+include 'application'
+include 'infrastructure'
