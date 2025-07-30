@@ -2,7 +2,7 @@ package com.assistent.admin.application.category.create;
 
 import com.assistent.admin.domain.category.Category;
 import com.assistent.admin.domain.category.CategoryGateway;
-import com.assistent.admin.domain.validation.handler.ThrowsValidationHandler;
+import com.assistent.admin.domain.validation.handler.Notification;
 
 import java.util.Objects;
 
@@ -20,8 +20,14 @@ public class DefaultCreateCategoryUseCase extends CreateCategoryUseCase {
         final var aDescription = aCommand.description();
         final var isActive = aCommand.isActive();
 
+        final var notification = Notification.create();
+
         final var aCategory = Category.newCategory(aName, aDescription, isActive);
-        aCategory.validate(new ThrowsValidationHandler());
+        aCategory.validate(notification);
+
+        if (notification.hasError()) {
+            //
+        }
 
         return CreateCategoryOutput.from(this.categoryGateway.create(aCategory));
     }
