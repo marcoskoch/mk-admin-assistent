@@ -6,6 +6,12 @@ import com.assistent.admin.domain.validation.handler.Notification;
 
 import java.util.Objects;
 
+import static io.vavr.API.Left;
+import static io.vavr.API.Try;
+
+import io.vavr.API;
+import io.vavr.control.Either;
+
 public class DefaultCreateCategoryUseCase extends CreateCategoryUseCase {
 
     private final CategoryGateway categoryGateway;
@@ -15,7 +21,7 @@ public class DefaultCreateCategoryUseCase extends CreateCategoryUseCase {
     }
 
     @Override
-    public CreateCategoryOutput execute(final CreateCategoryCommand aCommand) {
+    public Either<Notification, CreateCategoryOutput> execute(final CreateCategoryCommand aCommand) {
         final var aName = aCommand.name();
         final var aDescription = aCommand.description();
         final var isActive = aCommand.isActive();
@@ -25,10 +31,13 @@ public class DefaultCreateCategoryUseCase extends CreateCategoryUseCase {
         final var aCategory = Category.newCategory(aName, aDescription, isActive);
         aCategory.validate(notification);
 
-        if (notification.hasError()) {
-            //
-        }
 
-        return CreateCategoryOutput.from(this.categoryGateway.create(aCategory));
+        return notification.hasError() ? Left(notification) : create(aCategory);
+    }
+
+    private Either<Notification, CreateCategoryOutput> create(final Category aCategory) {
+        return Try(() -> this.categoryGateway.create(aCategory))
+                .toEither()
+                .bimap(Notification::create, CreateCategoryOutput::from);
     }
 }
