@@ -5,6 +5,7 @@ import com.assistent.admin.domain.category.CategoryGateway;
 import com.assistent.admin.domain.category.CategoryID;
 import com.assistent.admin.domain.exceptions.DomainException;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -29,6 +30,10 @@ public class UpdateCategoryUseCaseTest {
     @Mock
     private CategoryGateway categoryGateway;
 
+    @BeforeEach
+    void cleanUp() {
+        Mockito.reset(categoryGateway, useCase);
+    }
 
     @Test
     public void givenAValidCommand_whenCallsUpdateCategory_shouldReturnCategoryId() {
