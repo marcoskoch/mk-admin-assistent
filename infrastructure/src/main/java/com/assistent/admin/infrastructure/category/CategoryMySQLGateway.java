@@ -6,9 +6,11 @@ import com.assistent.admin.domain.category.CategoryID;
 import com.assistent.admin.domain.category.CategorySearchQuery;
 import com.assistent.admin.domain.pagination.Pagination;
 import com.assistent.admin.infrastructure.category.persistence.CategoryRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class CategoryMySQLGateway implements CategoryGateway {
 
     private final CategoryRepository repository;
