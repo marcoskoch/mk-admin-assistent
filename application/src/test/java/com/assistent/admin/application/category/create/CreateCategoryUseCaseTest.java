@@ -29,8 +29,13 @@ public class CreateCategoryUseCaseTest {
 
     @BeforeEach
     void cleanUp() {
-        Mockito.reset(categoryGateway, useCase);
+        Mockito.reset(categoryGateway);
     }
+
+    // 1. Teste do caminho feliz
+    // 2. Teste passando uma propriedade inválida (name)
+    // 3. Teste criando uma categoria inativa
+    // 4. Teste simulando um erro generico vindo do gateway
 
     @Test
     public void givenAValidCommand_whenCallsCreateCategory_shouldReturnCategoryId() {
