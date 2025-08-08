@@ -3,7 +3,7 @@ package com.assistent.admin.infrastructure.category;
 import com.assistent.admin.domain.category.Category;
 import com.assistent.admin.domain.category.CategoryID;
 import com.assistent.admin.domain.category.CategorySearchQuery;
-import com.assistent.admin.infrastructure.MySQLGatewayTest;
+import com.assistent.admin.MySQLGatewayTest;
 import com.assistent.admin.infrastructure.category.persistence.CategoryJpaEntity;
 import com.assistent.admin.infrastructure.category.persistence.CategoryRepository;
 import org.junit.jupiter.api.Assertions;

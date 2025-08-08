@@ -1,7 +1,7 @@
 package com.assistent.admin.infrastructure.category.persistence;
 
 import com.assistent.admin.domain.category.Category;
-import com.assistent.admin.infrastructure.MySQLGatewayTest;
+import com.assistent.admin.MySQLGatewayTest;
 import org.hibernate.PropertyValueException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
