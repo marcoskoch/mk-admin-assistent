@@ -3,7 +3,7 @@ package com.assistent.admin.application.category.retrieve.get;
 import com.assistent.admin.domain.category.Category;
 import com.assistent.admin.domain.category.CategoryGateway;
 import com.assistent.admin.domain.category.CategoryID;
-import com.assistent.admin.domain.exceptions.DomainException;
+import com.assistent.admin.domain.exceptions.NotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -66,7 +66,7 @@ public class GetCategoryByIdUseCaseTest {
                 .thenReturn(Optional.empty());
 
         final var actualException = Assertions.assertThrows(
-                DomainException.class,
+                NotFoundException.class,
                 () -> useCase.execute(expectedId.getValue())
         );
 

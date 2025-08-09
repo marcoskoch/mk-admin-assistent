@@ -4,7 +4,7 @@ import com.assistent.admin.IntegrationTest;
 import com.assistent.admin.domain.category.Category;
 import com.assistent.admin.domain.category.CategoryGateway;
 import com.assistent.admin.domain.category.CategoryID;
-import com.assistent.admin.domain.exceptions.DomainException;
+import com.assistent.admin.domain.exceptions.NotFoundException;
 import com.assistent.admin.infrastructure.category.persistence.CategoryJpaEntity;
 import com.assistent.admin.infrastructure.category.persistence.CategoryRepository;
 import org.junit.jupiter.api.Assertions;
@@ -59,7 +59,7 @@ public class GetCategoryByIdUseCaseIT {
         final var expectedId = CategoryID.from("123");
 
         final var actualException = Assertions.assertThrows(
-                DomainException.class,
+                NotFoundException.class,
                 () -> useCase.execute(expectedId.getValue())
         );
 
