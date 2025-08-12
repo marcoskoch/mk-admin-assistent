@@ -3,6 +3,7 @@ package com.assistent.admin.infrastructure.api.controllers;
 import com.assistent.admin.application.category.create.CreateCategoryCommand;
 import com.assistent.admin.application.category.create.CreateCategoryOutput;
 import com.assistent.admin.application.category.create.CreateCategoryUseCase;
+import com.assistent.admin.application.category.delete.DeleteCategoryUseCase;
 import com.assistent.admin.application.category.retrieve.get.GetCategoryByIdUseCase;
 import com.assistent.admin.application.category.update.UpdateCategoryCommand;
 import com.assistent.admin.application.category.update.UpdateCategoryOutput;
@@ -27,15 +28,18 @@ public class CategoryController implements CategoryAPI {
     private final CreateCategoryUseCase createCategoryUseCase;
     private final GetCategoryByIdUseCase getCategoryByIdUseCase;
     private final UpdateCategoryUseCase updateCategoryUseCase;
+    private final DeleteCategoryUseCase deleteCategoryUseCase;
 
     public CategoryController(
             final CreateCategoryUseCase createCategoryUseCase,
             final GetCategoryByIdUseCase getCategoryByIdUseCase,
-            final UpdateCategoryUseCase updateCategoryUseCase
+            final UpdateCategoryUseCase updateCategoryUseCase,
+            final DeleteCategoryUseCase deleteCategoryUseCase
     ) {
         this.createCategoryUseCase = Objects.requireNonNull(createCategoryUseCase);
         this.getCategoryByIdUseCase = Objects.requireNonNull(getCategoryByIdUseCase);
         this.updateCategoryUseCase = Objects.requireNonNull(updateCategoryUseCase);
+        this.deleteCategoryUseCase = Objects.requireNonNull(deleteCategoryUseCase);
     }
 
     @Override
@@ -83,5 +87,10 @@ public class CategoryController implements CategoryAPI {
 
         return this.updateCategoryUseCase.execute(aCommand)
                 .fold(onError, onSuccess);
+    }
+
+    @Override
+    public void deleteById(final String anId) {
+        this.deleteCategoryUseCase.execute(anId);
     }
 }
