@@ -3,6 +3,7 @@ package com.assistent.admin.domain.genre;
 import com.assistent.admin.domain.AggregateRoot;
 import com.assistent.admin.domain.category.CategoryID;
 import com.assistent.admin.domain.exceptions.NotificationException;
+import com.assistent.admin.domain.utils.InstantUtils;
 import com.assistent.admin.domain.validation.ValidationHandler;
 import com.assistent.admin.domain.validation.handler.Notification;
 
@@ -103,5 +104,21 @@ public class Genre extends AggregateRoot<GenreID> {
 
     public Instant getDeletedAt() {
         return deletedAt;
+    }
+
+    public Genre deactivate() {
+        if (getDeletedAt() == null) {
+            this.deletedAt = InstantUtils.now();
+        }
+        this.active = false;
+        this.updatedAt = InstantUtils.now();
+        return this;
+    }
+
+    public Genre activate() {
+        this.deletedAt = null;
+        this.active = true;
+        this.updatedAt = InstantUtils.now();
+        return this;
     }
 }
