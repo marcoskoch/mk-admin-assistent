@@ -3,7 +3,7 @@ package com.assistent.admin.infrastructure.category;
 import com.assistent.admin.domain.category.Category;
 import com.assistent.admin.domain.category.CategoryGateway;
 import com.assistent.admin.domain.category.CategoryID;
-import com.assistent.admin.domain.category.CategorySearchQuery;
+import com.assistent.admin.domain.pagination.SearchQuery;
 import com.assistent.admin.domain.pagination.Pagination;
 import com.assistent.admin.infrastructure.category.persistence.CategoryJpaEntity;
 import com.assistent.admin.infrastructure.category.persistence.CategoryRepository;
@@ -50,7 +50,7 @@ public class CategoryMySQLGateway implements CategoryGateway {
     }
 
     @Override
-    public Pagination<Category> findAll(final CategorySearchQuery aQuery) {
+    public Pagination<Category> findAll(final SearchQuery aQuery) {
         // Paginação
         final var page = PageRequest.of(
                 aQuery.page(),

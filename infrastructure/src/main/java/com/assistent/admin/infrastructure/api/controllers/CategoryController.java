@@ -9,7 +9,7 @@ import com.assistent.admin.application.category.retrieve.list.ListCategoriesUseC
 import com.assistent.admin.application.category.update.UpdateCategoryCommand;
 import com.assistent.admin.application.category.update.UpdateCategoryOutput;
 import com.assistent.admin.application.category.update.UpdateCategoryUseCase;
-import com.assistent.admin.domain.category.CategorySearchQuery;
+import com.assistent.admin.domain.pagination.SearchQuery;
 import com.assistent.admin.domain.pagination.Pagination;
 import com.assistent.admin.domain.validation.handler.Notification;
 import com.assistent.admin.infrastructure.api.CategoryAPI;
@@ -74,7 +74,7 @@ public class CategoryController implements CategoryAPI {
             final String sort,
             final String direction
     ) {
-        return listCategoriesUseCase.execute(new CategorySearchQuery(page, perPage, search, sort, direction))
+        return listCategoriesUseCase.execute(new SearchQuery(page, perPage, search, sort, direction))
                 .map(CategoryApiPresenter::present);
     }
 
