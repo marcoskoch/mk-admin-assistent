@@ -3,6 +3,7 @@ package com.assistent.admin.domain.category;
 import com.assistent.admin.domain.pagination.SearchQuery;
 import com.assistent.admin.domain.pagination.Pagination;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface CategoryGateway {
@@ -16,4 +17,6 @@ public interface CategoryGateway {
     Category update(Category aCategory);
 
     Pagination<Category> findAll(SearchQuery aQuery);
+
+    List<CategoryID> existsByIds(Iterable<CategoryID> ids);
 }
