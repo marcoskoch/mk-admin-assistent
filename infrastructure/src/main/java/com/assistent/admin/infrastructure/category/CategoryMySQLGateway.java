@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 import static com.assistent.admin.infrastructure.utils.SpecificationUtils.like;
 
@@ -78,9 +79,13 @@ public class CategoryMySQLGateway implements CategoryGateway {
     }
 
     @Override
-    public List<CategoryID> existsByIds(final Iterable<CategoryID> ids) {
-        // TODO: Implementar quando chegar na camada de infraestrutura de Genre.
-        return Collections.emptyList();
+    public List<CategoryID> existsByIds(final Iterable<CategoryID> categoryIDs) {
+        final var ids = StreamSupport.stream(categoryIDs.spliterator(), false)
+                .map(CategoryID::getValue)
+                .toList();
+        return this.repository.existsByIds(ids).stream()
+                .map(CategoryID::from)
+                .toList();
     }
 
     private Category save(final Category aCategory) {
