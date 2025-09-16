@@ -3,6 +3,8 @@ package com.assistent.admin.infrastructure.api.controllers;
 import com.assistent.admin.application.genre.create.CreateGenreCommand;
 import com.assistent.admin.application.genre.create.CreateGenreUseCase;
 import com.assistent.admin.application.genre.retrieve.get.GetGenreByIdUseCase;
+import com.assistent.admin.application.genre.update.UpdateGenreCommand;
+import com.assistent.admin.application.genre.update.UpdateGenreUseCase;
 import com.assistent.admin.domain.pagination.Pagination;
 import com.assistent.admin.infrastructure.api.GenreAPI;
 import com.assistent.admin.infrastructure.genre.models.CreateGenreRequest;
@@ -22,12 +24,16 @@ public class GenreController implements GenreAPI {
 
     private final GetGenreByIdUseCase getGenreByIdUseCase;
 
+    private final UpdateGenreUseCase updateGenreUseCase;
+
     public GenreController(
             final CreateGenreUseCase createGenreUseCase,
-            final GetGenreByIdUseCase getGenreByIdUseCase
+            final GetGenreByIdUseCase getGenreByIdUseCase,
+            final UpdateGenreUseCase updateGenreUseCase
     ) {
         this.createGenreUseCase = createGenreUseCase;
         this.getGenreByIdUseCase = getGenreByIdUseCase;
+        this.updateGenreUseCase = updateGenreUseCase;
     }
 
     @Override
@@ -61,7 +67,16 @@ public class GenreController implements GenreAPI {
 
     @Override
     public ResponseEntity<?> updateById(final String id, final UpdateGenreRequest input) {
-        return null;
+        final var aCommand = UpdateGenreCommand.with(
+                id,
+                input.name(),
+                input.isActive(),
+                input.categories()
+        );
+
+        final var output = this.updateGenreUseCase.execute(aCommand);
+
+        return ResponseEntity.ok(output);
     }
 
     @Override
