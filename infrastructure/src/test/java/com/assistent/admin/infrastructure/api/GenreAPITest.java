@@ -3,6 +3,7 @@ package com.assistent.admin.infrastructure.api;
 import com.assistent.admin.ControllerTest;
 import com.assistent.admin.application.genre.create.CreateGenreOutput;
 import com.assistent.admin.application.genre.create.CreateGenreUseCase;
+import com.assistent.admin.application.genre.delete.DeleteGenreUseCase;
 import com.assistent.admin.application.genre.retrieve.get.GenreOutput;
 import com.assistent.admin.application.genre.retrieve.get.GetGenreByIdUseCase;
 import com.assistent.admin.application.genre.update.UpdateGenreOutput;
@@ -26,9 +27,9 @@ import java.util.List;
 import java.util.Objects;
 
 import static org.hamcrest.Matchers.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -50,6 +51,9 @@ public class GenreAPITest {
 
     @MockBean
     private UpdateGenreUseCase updateGenreUseCase;
+
+    @MockBean
+    private DeleteGenreUseCase deleteGenreUseCase;
 
     @Test
     public void givenAValidCommand_whenCallsCreateGenre_shouldReturnGenreId() throws Exception {
@@ -258,5 +262,25 @@ public class GenreAPITest {
                         && Objects.equals(expectedCategories, cmd.categories())
                         && Objects.equals(expectedIsActive, cmd.isActive())
         ));
+    }
+
+    @Test
+    public void givenAValidId_whenCallsDeleteGenre_shouldBeOK() throws Exception {
+        // given
+        final var expectedId = "123";
+
+        doNothing()
+                .when(deleteGenreUseCase).execute(any());
+
+        // when
+        final var aRequest = delete("/genres/{id}", expectedId)
+                .accept(MediaType.APPLICATION_JSON);
+
+        final var result = this.mvc.perform(aRequest);
+
+        // then
+        result.andExpect(status().isNoContent());
+
+        verify(deleteGenreUseCase).execute(eq(expectedId));
     }
 }
