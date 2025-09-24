@@ -9,6 +9,7 @@ import com.assistent.admin.infrastructure.category.models.UpdateCategoryRequest;
 import com.assistent.admin.infrastructure.configuration.json.Json;
 import com.assistent.admin.infrastructure.genre.models.CreateGenreRequest;
 import com.assistent.admin.infrastructure.genre.models.GenreResponse;
+import com.assistent.admin.infrastructure.genre.models.UpdateGenreRequest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -76,6 +77,10 @@ public interface MockDsl {
         return this.retrieve("/genres/", anId, GenreResponse.class);
     }
 
+    default ResultActions updateAGenre(final Identifier anId, final UpdateGenreRequest aRequest) throws Exception {
+        return this.update("/genres/", anId, aRequest);
+    }
+
     default <A, D> List<D> mapTo(final List<A> actual, final Function<A, D> mapper) {
         return actual.stream()
                 .map(mapper)
@@ -111,8 +116,8 @@ public interface MockDsl {
 
     private <T> T retrieve(final String url, final Identifier anId, final Class<T> clazz) throws Exception {
         final var aRequest = get(url + anId.getValue())
-                .accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON);
+                .accept(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(MediaType.APPLICATION_JSON_UTF8);
 
         final var json = this.mvc().perform(aRequest)
                 .andExpect(status().isOk())
