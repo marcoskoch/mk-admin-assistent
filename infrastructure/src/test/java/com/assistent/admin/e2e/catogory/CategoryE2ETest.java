@@ -1,6 +1,7 @@
 package com.assistent.admin.e2e.catogory;
 
 import com.assistent.admin.E2ETest;
+import com.assistent.admin.domain.category.CategoryID;
 import com.assistent.admin.e2e.MockDsl;
 import com.assistent.admin.infrastructure.category.models.UpdateCategoryRequest;
 import com.assistent.admin.infrastructure.category.persistence.CategoryRepository;
@@ -271,5 +272,16 @@ public class CategoryE2ETest implements MockDsl {
                 .andExpect(status().isNoContent());
 
         Assertions.assertFalse(this.categoryRepository.existsById(actualId.getValue()));
+    }
+
+    @Test
+    public void asACatalogAdminIShouldNotSeeAnErrorByDeletingANotExistentCategory() throws Exception {
+        Assertions.assertTrue(MYSQL_CONTAINER.isRunning());
+        Assertions.assertEquals(0, categoryRepository.count());
+
+        deleteACategory(CategoryID.from("12313"))
+                .andExpect(status().isNoContent());
+
+        Assertions.assertEquals(0, categoryRepository.count());
     }
 }
