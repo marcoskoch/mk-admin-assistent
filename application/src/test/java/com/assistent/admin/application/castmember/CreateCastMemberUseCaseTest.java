@@ -2,6 +2,8 @@ package com.assistent.admin.application.castmember;
 
 import com.assistent.admin.application.Fixture;
 import com.assistent.admin.application.UseCaseTest;
+import com.assistent.admin.application.castmember.create.CreateCastMemberCommand;
+import com.assistent.admin.application.castmember.create.DefaultCreateCastMemberUseCase;
 import com.assistent.admin.domain.castmember.CastMemberGateway;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
