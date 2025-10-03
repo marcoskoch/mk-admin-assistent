@@ -1,0 +1,47 @@
+package com.assistent.admin.infrastructure.castmember;
+
+import com.assistent.admin.domain.castmember.CastMember;
+import com.assistent.admin.domain.castmember.CastMemberGateway;
+import com.assistent.admin.domain.castmember.CastMemberID;
+import com.assistent.admin.domain.pagination.Pagination;
+import com.assistent.admin.domain.pagination.SearchQuery;
+import com.assistent.admin.infrastructure.castmember.persistence.CastMemberRepository;
+import org.springframework.stereotype.Component;
+
+import java.util.Objects;
+import java.util.Optional;
+
+@Component
+public class CastMemberMySQLGateway implements CastMemberGateway {
+
+    private final CastMemberRepository castMemberRepository;
+
+    public CastMemberMySQLGateway(final CastMemberRepository castMemberRepository) {
+        this.castMemberRepository = Objects.requireNonNull(castMemberRepository);
+    }
+
+    @Override
+    public CastMember create(final CastMember aCastMember) {
+        return null;
+    }
+
+    @Override
+    public void deleteById(final CastMemberID anId) {
+
+    }
+
+    @Override
+    public Optional<CastMember> findById(final CastMemberID anId) {
+        return Optional.empty();
+    }
+
+    @Override
+    public CastMember update(final CastMember aCastMember) {
+        return null;
+    }
+
+    @Override
+    public Pagination<CastMember> findAll(final SearchQuery aQuery) {
+        return null;
+    }
+}
