@@ -3,9 +3,12 @@ package com.assistent.admin.infrastructure.api.controllers;
 import com.assistent.admin.application.castmember.create.CreateCastMemberCommand;
 import com.assistent.admin.application.castmember.create.CreateCastMemberUseCase;
 import com.assistent.admin.application.castmember.retrieve.get.GetCastMemberByIdUseCase;
+import com.assistent.admin.application.castmember.update.UpdateCastMemberCommand;
+import com.assistent.admin.application.castmember.update.UpdateCastMemberUseCase;
 import com.assistent.admin.infrastructure.api.CastMemberAPI;
 import com.assistent.admin.infrastructure.castmember.models.CastMemberResponse;
 import com.assistent.admin.infrastructure.castmember.models.CreateCastMemberRequest;
+import com.assistent.admin.infrastructure.castmember.models.UpdateCastMemberRequest;
 import com.assistent.admin.infrastructure.castmember.presenter.CastMemberPresenter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,13 +21,16 @@ public class CastMemberController implements CastMemberAPI {
 
     private final CreateCastMemberUseCase createCastMemberUseCase;
     private final GetCastMemberByIdUseCase getCastMemberByIdUseCase;
+    private final UpdateCastMemberUseCase updateCastMemberUseCase;
 
     public CastMemberController(
             final CreateCastMemberUseCase createCastMemberUseCase,
-            final GetCastMemberByIdUseCase getCastMemberByIdUseCase
+            final GetCastMemberByIdUseCase getCastMemberByIdUseCase,
+            final UpdateCastMemberUseCase updateCastMemberUseCase
     ) {
         this.createCastMemberUseCase = Objects.requireNonNull(createCastMemberUseCase);
         this.getCastMemberByIdUseCase = Objects.requireNonNull(getCastMemberByIdUseCase);
+        this.updateCastMemberUseCase = Objects.requireNonNull(updateCastMemberUseCase);
     }
 
     @Override
@@ -40,5 +46,15 @@ public class CastMemberController implements CastMemberAPI {
     @Override
     public CastMemberResponse getById(final String id) {
         return CastMemberPresenter.present(this.getCastMemberByIdUseCase.execute(id));
+    }
+
+    @Override
+    public ResponseEntity<?> updateById(final String id, final UpdateCastMemberRequest aBody) {
+        final var aCommand =
+                UpdateCastMemberCommand.with(id, aBody.name(), aBody.type());
+
+        final var output = this.updateCastMemberUseCase.execute(aCommand);
+
+        return ResponseEntity.ok(output);
     }
 }
