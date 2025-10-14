@@ -1,0 +1,7 @@
+package com.assistent.admin.application.video.create;
+
+import com.assistent.admin.application.UseCase;
+
+public abstract class CreateVideoUseCase
+        extends UseCase<CreateVideoCommand, CreateVideoOutput> {
+}
