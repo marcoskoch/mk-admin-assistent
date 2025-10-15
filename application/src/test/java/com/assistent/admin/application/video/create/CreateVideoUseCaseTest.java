@@ -3,10 +3,13 @@ package com.assistent.admin.application.video.create;
 import com.assistent.admin.application.Fixture;
 import com.assistent.admin.application.UseCaseTest;
 import com.assistent.admin.domain.castmember.CastMemberGateway;
+import com.assistent.admin.domain.castmember.CastMemberID;
 import com.assistent.admin.domain.category.CategoryGateway;
+import com.assistent.admin.domain.category.CategoryID;
 import com.assistent.admin.domain.exceptions.InternalErrorException;
 import com.assistent.admin.domain.exceptions.NotificationException;
 import com.assistent.admin.domain.genre.GenreGateway;
+import com.assistent.admin.domain.genre.GenreID;
 import com.assistent.admin.domain.video.*;
 import com.assistent.admin.domain.video.Resource.Type;
 import org.junit.jupiter.api.Assertions;
@@ -20,8 +23,7 @@ import java.util.*;
 import static org.mockito.AdditionalAnswers.returnsFirstArg;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class CreateVideoUseCaseTest extends UseCaseTest {
 
