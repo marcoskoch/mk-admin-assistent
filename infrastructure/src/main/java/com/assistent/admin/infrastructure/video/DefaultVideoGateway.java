@@ -23,27 +23,37 @@ public class DefaultVideoGateway implements VideoGateway {
     @Override
     @Transactional
     public Video create(final Video aVideo) {
-        return this.videoRepository.save(VideoJpaEntity.from(aVideo))
-                .toAggregate();
+        return save(aVideo);
     }
 
     @Override
-    public void deleteById(VideoID anId) {
-
+    public void deleteById(final VideoID anId) {
+        final var aVideoId = anId.getValue();
+        if (this.videoRepository.existsById(aVideoId)) {
+            this.videoRepository.deleteById(aVideoId);
+        }
     }
 
     @Override
-    public Optional<Video> findById(VideoID anId) {
-        return Optional.empty();
+    @Transactional(readOnly = true)
+    public Optional<Video> findById(final VideoID anId) {
+        return this.videoRepository.findById(anId.getValue())
+                .map(VideoJpaEntity::toAggregate);
     }
 
     @Override
-    public Video update(Video aVideo) {
-        return null;
+    @Transactional
+    public Video update(final Video aVideo) {
+        return save(aVideo);
     }
 
     @Override
     public Pagination<Video> findAll(VideoSearchQuery aQuery) {
         return null;
+    }
+
+    private Video save(final Video aVideo) {
+        return this.videoRepository.save(VideoJpaEntity.from(aVideo))
+                .toAggregate();
     }
 }
