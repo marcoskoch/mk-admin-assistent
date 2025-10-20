@@ -1,6 +1,7 @@
 package com.assistent.admin.domain.genre;
 
 import com.assistent.admin.domain.Identifier;
+import com.assistent.admin.domain.utils.IdUtils;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -15,15 +16,11 @@ public class GenreID extends Identifier {
     }
 
     public static GenreID unique() {
-        return GenreID.from(UUID.randomUUID());
+        return GenreID.from(IdUtils.uuid());
     }
 
     public static GenreID from(final String anId) {
         return new GenreID(anId);
-    }
-
-    public static GenreID from(final UUID anId) {
-        return new GenreID(anId.toString().toLowerCase());
     }
 
     @Override

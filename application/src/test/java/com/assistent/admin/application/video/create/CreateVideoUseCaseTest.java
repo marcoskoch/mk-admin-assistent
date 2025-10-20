@@ -10,6 +10,7 @@ import com.assistent.admin.domain.exceptions.InternalErrorException;
 import com.assistent.admin.domain.exceptions.NotificationException;
 import com.assistent.admin.domain.genre.GenreGateway;
 import com.assistent.admin.domain.genre.GenreID;
+import com.assistent.admin.domain.utils.IdUtils;
 import com.assistent.admin.domain.video.*;
 import com.assistent.admin.domain.video.Resource.Type;
 import org.junit.jupiter.api.Assertions;
@@ -1001,7 +1002,7 @@ public class CreateVideoUseCaseTest extends UseCaseTest {
     private void mockImageMedia() {
         when(mediaResourceGateway.storeImage(any(), any())).thenAnswer(t -> {
             final var resource = t.getArgument(1, Resource.class);
-            return ImageMedia.with(UUID.randomUUID().toString(), resource.name(), "/img");
+            return ImageMedia.with(IdUtils.uuid(), resource.name(), "/img");
         });
     }
 
@@ -1009,7 +1010,7 @@ public class CreateVideoUseCaseTest extends UseCaseTest {
         when(mediaResourceGateway.storeAudioVideo(any(), any())).thenAnswer(t -> {
             final var resource = t.getArgument(1, Resource.class);
             return AudioVideoMedia.with(
-                    UUID.randomUUID().toString(),
+                    IdUtils.uuid(),
                     resource.name(),
                     "/img",
                     "",
