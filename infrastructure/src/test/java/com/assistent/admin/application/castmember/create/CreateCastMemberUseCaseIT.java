@@ -1,6 +1,6 @@
 package com.assistent.admin.application.castmember.create;
 
-import com.assistent.admin.Fixture;
+import com.assistent.admin.domain.Fixture;
 import com.assistent.admin.IntegrationTest;
 import com.assistent.admin.domain.castmember.CastMemberGateway;
 import com.assistent.admin.domain.castmember.CastMemberType;
@@ -31,7 +31,7 @@ public class CreateCastMemberUseCaseIT {
     public void givenAValidCommand_whenCallsCreateCastMember_shouldReturnIt() {
         // given
         final var expectedName = Fixture.name();
-        final var expectedType = Fixture.CastMember.type();
+        final var expectedType = Fixture.CastMembers.type();
 
         final var aCommand = CreateCastMemberCommand.with(expectedName, expectedType);
 
@@ -57,7 +57,7 @@ public class CreateCastMemberUseCaseIT {
     public void givenAInvalidName_whenCallsCreateCastMember_shouldThrowsNotificationException() {
         // given
         final String expectedName = null;
-        final var expectedType = Fixture.CastMember.type();
+        final var expectedType = Fixture.CastMembers.type();
 
         final var expectedErrorCount = 1;
         final var expectedErrorMessage = "'name' should not be null";

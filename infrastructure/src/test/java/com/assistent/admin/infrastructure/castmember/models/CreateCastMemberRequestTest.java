@@ -1,6 +1,6 @@
 package com.assistent.admin.infrastructure.castmember.models;
 
-import com.assistent.admin.Fixture;
+import com.assistent.admin.domain.Fixture;
 import com.assistent.admin.JacksonTest;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,7 @@ class CreateCastMemberRequestTest {
     @Test
     public void testUnmarshall() throws Exception {
         final var expectedName = Fixture.name();
-        final var expectedType = Fixture.CastMember.type();
+        final var expectedType = Fixture.CastMembers.type();
 
         final var json = """
                 {

@@ -1,6 +1,6 @@
 package com.assistent.admin.application.video.update;
 
-import com.assistent.admin.application.Fixture;
+import com.assistent.admin.domain.Fixture;
 import com.assistent.admin.application.UseCaseTest;
 import com.assistent.admin.domain.castmember.CastMemberGateway;
 import com.assistent.admin.domain.castmember.CastMemberID;

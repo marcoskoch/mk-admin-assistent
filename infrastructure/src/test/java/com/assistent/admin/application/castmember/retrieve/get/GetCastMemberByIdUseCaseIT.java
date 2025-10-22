@@ -1,6 +1,6 @@
 package com.assistent.admin.application.castmember.retrieve.get;
 
-import com.assistent.admin.Fixture;
+import com.assistent.admin.domain.Fixture;
 import com.assistent.admin.IntegrationTest;
 import com.assistent.admin.domain.castmember.CastMember;
 import com.assistent.admin.domain.castmember.CastMemberGateway;
@@ -33,7 +33,7 @@ public class GetCastMemberByIdUseCaseIT {
     public void givenAValidId_whenCallsGetCastMember_shouldReturnIt() {
         // given
         final var expectedName = Fixture.name();
-        final var expectedType = Fixture.CastMember.type();
+        final var expectedType = Fixture.CastMembers.type();
 
         final var aMember = CastMember.newMember(expectedName, expectedType);
 

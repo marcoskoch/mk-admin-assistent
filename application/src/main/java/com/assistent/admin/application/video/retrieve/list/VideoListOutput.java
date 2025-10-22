@@ -1,6 +1,7 @@
 package com.assistent.admin.application.video.retrieve.list;
 
 import com.assistent.admin.domain.video.Video;
+import com.assistent.admin.domain.video.VideoPreview;
 
 import java.time.Instant;
 
@@ -19,6 +20,16 @@ public record VideoListOutput(
                 aVideo.getDescription(),
                 aVideo.getCreatedAt(),
                 aVideo.getUpdatedAt()
+        );
+    }
+
+    public static VideoListOutput from(final VideoPreview aVideo) {
+        return new VideoListOutput(
+                aVideo.id(),
+                aVideo.title(),
+                aVideo.description(),
+                aVideo.createdAt(),
+                aVideo.updatedAt()
         );
     }
 }

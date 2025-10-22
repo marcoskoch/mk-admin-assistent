@@ -1,6 +1,6 @@
 package com.assistent.admin.application.castmember.retrieve.list;
 
-import com.assistent.admin.Fixture;
+import com.assistent.admin.domain.Fixture;
 import com.assistent.admin.IntegrationTest;
 import com.assistent.admin.domain.castmember.CastMember;
 import com.assistent.admin.domain.castmember.CastMemberGateway;
@@ -34,8 +34,8 @@ public class ListCastMembersUseCaseIT {
     public void givenAValidQuery_whenCallsListCastMembers_shouldReturnAll() {
         // given
         final var members = List.of(
-                CastMember.newMember(Fixture.name(), Fixture.CastMember.type()),
-                CastMember.newMember(Fixture.name(), Fixture.CastMember.type())
+                CastMember.newMember(Fixture.name(), Fixture.CastMembers.type()),
+                CastMember.newMember(Fixture.name(), Fixture.CastMembers.type())
         );
 
         this.castMemberRepository.saveAllAndFlush(

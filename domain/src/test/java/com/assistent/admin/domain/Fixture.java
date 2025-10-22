@@ -1,4 +1,4 @@
-package com.assistent.admin.application;
+package com.assistent.admin.domain;
 
 import com.assistent.admin.domain.castmember.CastMember;
 import com.assistent.admin.domain.castmember.CastMemberType;
