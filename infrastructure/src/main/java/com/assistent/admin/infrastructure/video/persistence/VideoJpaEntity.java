@@ -3,6 +3,7 @@ package com.assistent.admin.infrastructure.video.persistence;
 import com.assistent.admin.domain.castmember.CastMemberID;
 import com.assistent.admin.domain.category.CategoryID;
 import com.assistent.admin.domain.genre.GenreID;
+import com.assistent.admin.domain.utils.CollectionUtils;
 import com.assistent.admin.domain.video.Rating;
 import com.assistent.admin.domain.video.Video;
 import com.assistent.admin.domain.video.VideoID;
@@ -373,5 +374,17 @@ public class VideoJpaEntity {
     public VideoJpaEntity setCastMembers(Set<VideoCastMemberJpaEntity> castMembers) {
         this.castMembers = castMembers;
         return this;
+    }
+
+    public Set<CategoryID> getCategoriesID() {
+        return CollectionUtils.mapTo(getCategories(), it -> CategoryID.from(it.getId().getCategoryId()));
+    }
+
+    public Set<GenreID> getGenresID() {
+        return CollectionUtils.mapTo(getGenres(), it -> GenreID.from(it.getId().getGenreId()));
+    }
+
+    public Set<CastMemberID> getCastMembersID() {
+        return CollectionUtils.mapTo(getCastMembers(), it -> CastMemberID.from(it.getId().getCastMemberId()));
     }
 }
