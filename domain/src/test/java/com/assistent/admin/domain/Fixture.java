@@ -4,9 +4,9 @@ import com.assistent.admin.domain.castmember.CastMember;
 import com.assistent.admin.domain.castmember.CastMemberType;
 import com.assistent.admin.domain.category.Category;
 import com.assistent.admin.domain.genre.Genre;
-import com.assistent.admin.domain.video.Rating;
-import com.assistent.admin.domain.video.Resource;
-import com.assistent.admin.domain.video.Video;
+import com.assistent.admin.domain.utils.IdUtils;
+import com.assistent.admin.domain.video.*;
+import com.assistent.admin.domain.resource.Resource;
 import com.github.javafaker.Faker;
 
 import java.time.Year;
@@ -42,6 +42,9 @@ public final class Fixture {
         );
     }
 
+    public static String checksum() {
+        return "03fe62de";
+    }
 
     public static Video video() {
         return Video.newVideo(
@@ -136,15 +139,34 @@ public final class Fixture {
             return FAKER.options().option(Rating.values());
         }
 
-        public static Resource resource(final Resource.Type type) {
+        public static Resource resource(final VideoMediaType type) {
             final String contentType = Match(type).of(
-                    Case($(List(Resource.Type.VIDEO, Resource.Type.TRAILER)::contains), "video/mp4"),
+                    Case($(List(VideoMediaType.VIDEO, VideoMediaType.TRAILER)::contains), "video/mp4"),
                     Case($(), "image/jpg")
             );
 
+            final String checksum = IdUtils.uuid();
             final byte[] content = "Conteudo".getBytes();
 
-            return Resource.with(content, contentType, type.name().toLowerCase(), type);
+            return Resource.with(checksum, content, contentType, type.name().toLowerCase());
+        }
+
+        public static AudioVideoMedia audioVideo(final VideoMediaType type) {
+            final var checksum = Fixture.checksum();
+            return AudioVideoMedia.with(
+                    checksum,
+                    type.name().toLowerCase(),
+                    "/videos/" + checksum
+            );
+        }
+
+        public static ImageMedia imageMedia(final VideoMediaType type) {
+            final var checksum = Fixture.checksum();
+            return ImageMedia.with(
+                    checksum,
+                    type.name().toLowerCase(),
+                    "/images/" + checksum
+            );
         }
 
         public static String description() {

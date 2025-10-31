@@ -1,6 +1,6 @@
 package com.assistent.admin.application.video.create;
 
-import com.assistent.admin.domain.video.Resource;
+import com.assistent.admin.domain.resource.Resource;
 
 import java.util.Optional;
 import java.util.Set;
