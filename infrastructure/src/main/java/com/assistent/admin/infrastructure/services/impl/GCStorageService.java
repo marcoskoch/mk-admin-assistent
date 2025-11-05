@@ -35,10 +35,10 @@ public class GCStorageService implements StorageService {
     public Optional<Resource> get(final String name) {
         return Optional.ofNullable(this.storage.get(this.bucket, name))
                 .map(blob -> Resource.with(
-                        blob.getCrc32c(),
+                        blob.getCrc32cToHexString(),
                         blob.getContent(),
                         blob.getContentType(),
-                        name
+                        blob.getName()
                 ));
     }
 
