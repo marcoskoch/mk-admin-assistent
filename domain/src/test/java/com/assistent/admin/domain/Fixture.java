@@ -187,5 +187,14 @@ public final class Fixture {
                             """
             );
         }
+
+        public static ImageMedia image(final VideoMediaType type) {
+            final var checksum = Fixture.checksum();
+            return ImageMedia.with(
+                    checksum,
+                    type.name().toLowerCase(),
+                    "/images/" + checksum
+            );
+        }
     }
 }
