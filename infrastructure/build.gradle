@@ -31,32 +31,35 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":application"))
 
+    implementation('io.vavr:vavr:0.10.4')
+
     implementation('com.google.cloud:google-cloud-storage:2.14.0')
     implementation 'com.google.guava:guava:31.1-jre'
 
-    implementation('io.vavr:vavr:0.10.4')
-
     implementation('mysql:mysql-connector-java')
 
-    implementation("org.springdoc:springdoc-openapi-webmvc-core:1.7.0")
-    implementation("org.springdoc:springdoc-openapi-ui:1.7.0")
+    implementation('org.springdoc:springdoc-openapi-webmvc-core:1.6.8')
+    implementation('org.springdoc:springdoc-openapi-ui:1.6.8')
 
     implementation('org.springframework.boot:spring-boot-starter-web') {
         exclude module: 'spring-boot-starter-tomcat'
     }
     implementation('org.springframework.boot:spring-boot-starter-undertow')
     implementation('org.springframework.boot:spring-boot-starter-data-jpa')
+    implementation('org.springframework.boot:spring-boot-starter-amqp')
 
     implementation('com.fasterxml.jackson.module:jackson-module-afterburner')
 
-    testImplementation('org.flywaydb:flyway-core')
-    testImplementation('org.springframework.boot:spring-boot-starter-test')
-
     testImplementation(project(path: ':domain', configuration: 'testClasses'))
 
-    testImplementation('org.testcontainers:testcontainers:1.17.2')
-    testImplementation('org.testcontainers:mysql:1.17.2')
-    testImplementation('org.testcontainers:junit-jupiter:1.17.2')
+    testImplementation('org.flywaydb:flyway-core')
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+    testImplementation('org.springframework.amqp:spring-rabbit-test:2.4.4')
+
+    testImplementation('org.testcontainers:testcontainers:1.21.4')
+    testImplementation('org.testcontainers:mysql:1.21.4')
+    testImplementation('org.testcontainers:junit-jupiter:1.21.4')
 
     testRuntimeOnly('com.h2database:h2')
 }
