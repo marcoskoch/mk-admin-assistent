@@ -3,6 +3,8 @@ package com.assistent.admin.infrastructure.video;
 import com.assistent.admin.domain.Identifier;
 import com.assistent.admin.domain.pagination.Pagination;
 import com.assistent.admin.domain.video.*;
+import com.assistent.admin.infrastructure.configuration.annotations.VideoCreatedQueue;
+import com.assistent.admin.infrastructure.services.EventService;
 import com.assistent.admin.infrastructure.utils.SqlUtils;
 import com.assistent.admin.infrastructure.video.persistence.VideoJpaEntity;
 import com.assistent.admin.infrastructure.video.persistence.VideoRepository;
@@ -20,9 +22,14 @@ import static com.assistent.admin.domain.utils.CollectionUtils.nullIfEmpty;
 @Component
 public class DefaultVideoGateway implements VideoGateway {
 
+    private final EventService eventService;
     private final VideoRepository videoRepository;
 
-    public DefaultVideoGateway(final VideoRepository videoRepository) {
+    public DefaultVideoGateway(
+            @VideoCreatedQueue final EventService eventService,
+            final VideoRepository videoRepository
+    ) {
+        this.eventService = Objects.requireNonNull(eventService);
         this.videoRepository = Objects.requireNonNull(videoRepository);
     }
 
@@ -78,7 +85,11 @@ public class DefaultVideoGateway implements VideoGateway {
     }
 
     private Video save(final Video aVideo) {
-        return this.videoRepository.save(VideoJpaEntity.from(aVideo))
+        final var result = this.videoRepository.save(VideoJpaEntity.from(aVideo))
                 .toAggregate();
+
+        aVideo.publishDomainEvents(this.eventService::send);
+
+        return result;
     }
 }
