@@ -6,6 +6,7 @@ import com.assistent.admin.application.video.create.CreateVideoOutput;
 import com.assistent.admin.application.video.create.CreateVideoUseCase;
 import com.assistent.admin.domain.Fixture;
 import com.assistent.admin.domain.video.VideoID;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
-import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.time.Year;
 import java.util.Set;
@@ -118,10 +118,10 @@ public class VideoAPITest {
         Assertions.assertEquals(expectedCategories, actualCmd.categories());
         Assertions.assertEquals(expectedGenres, actualCmd.genres());
         Assertions.assertEquals(expectedMembers, actualCmd.members());
-        Assertions.assertEquals(expectedVideo.getName(), actualCmd.getVideo().get().name());
-        Assertions.assertEquals(expectedTrailer.getName(), actualCmd.getTrailer().get().name());
-        Assertions.assertEquals(expectedBanner.getName(), actualCmd.getBanner().get().name());
-        Assertions.assertEquals(expectedThumb.getName(), actualCmd.getThumbnail().get().name());
-        Assertions.assertEquals(expectedThumbHalf.getName(), actualCmd.getThumbnailHalf().get().name());
+        Assertions.assertEquals(expectedVideo.getOriginalFilename(), actualCmd.getVideo().get().name());
+        Assertions.assertEquals(expectedTrailer.getOriginalFilename(), actualCmd.getTrailer().get().name());
+        Assertions.assertEquals(expectedBanner.getOriginalFilename(), actualCmd.getBanner().get().name());
+        Assertions.assertEquals(expectedThumb.getOriginalFilename(), actualCmd.getThumbnail().get().name());
+        Assertions.assertEquals(expectedThumbHalf.getOriginalFilename(), actualCmd.getThumbnailHalf().get().name());
     }
 }
