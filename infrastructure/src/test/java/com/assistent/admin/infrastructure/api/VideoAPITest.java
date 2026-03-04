@@ -6,6 +6,7 @@ import com.assistent.admin.application.video.create.CreateVideoOutput;
 import com.assistent.admin.application.video.create.CreateVideoUseCase;
 import com.assistent.admin.domain.Fixture;
 import com.assistent.admin.domain.video.VideoID;
+import com.assistent.admin.infrastructure.video.models.CreateVideoRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
