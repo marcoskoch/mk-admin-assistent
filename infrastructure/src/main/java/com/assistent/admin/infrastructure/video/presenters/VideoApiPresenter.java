@@ -1,5 +1,6 @@
 package com.assistent.admin.infrastructure.video.presenters;
 
+import com.assistent.admin.application.video.media.upload.UploadMediaOutput;
 import com.assistent.admin.application.video.retrieve.get.VideoOutput;
 import com.assistent.admin.application.video.retrieve.list.VideoListOutput;
 import com.assistent.admin.application.video.update.UpdateVideoOutput;
@@ -75,5 +76,9 @@ public interface VideoApiPresenter {
 
     static Pagination<VideoListResponse> present(final Pagination<VideoListOutput> page) {
         return page.map(VideoApiPresenter::present);
+    }
+
+    static UploadMediaResponse present(final UploadMediaOutput output) {
+        return new UploadMediaResponse(output.videoId(), output.mediaType());
     }
 }
