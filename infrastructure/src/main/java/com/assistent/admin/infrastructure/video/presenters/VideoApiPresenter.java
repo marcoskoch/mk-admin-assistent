@@ -1,10 +1,12 @@
 package com.assistent.admin.infrastructure.video.presenters;
 
 import com.assistent.admin.application.video.retrieve.get.VideoOutput;
+import com.assistent.admin.application.video.update.UpdateVideoOutput;
 import com.assistent.admin.domain.video.AudioVideoMedia;
 import com.assistent.admin.domain.video.ImageMedia;
 import com.assistent.admin.infrastructure.video.models.AudioVideoMediaResponse;
 import com.assistent.admin.infrastructure.video.models.ImageMediaResponse;
+import com.assistent.admin.infrastructure.video.models.UpdateVideoResponse;
 import com.assistent.admin.infrastructure.video.models.VideoResponse;
 
 public interface VideoApiPresenter {
@@ -56,5 +58,9 @@ public interface VideoApiPresenter {
                 image.name(),
                 image.location()
         );
+    }
+
+    static UpdateVideoResponse present(final UpdateVideoOutput output) {
+        return new UpdateVideoResponse(output.id());
     }
 }
