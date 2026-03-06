@@ -1,12 +1,13 @@
 package com.assistent.admin.domain.video;
 
+import com.assistent.admin.domain.UnitTest;
 import com.assistent.admin.domain.utils.IdUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class AudioVideoMediaTest {
+class AudioVideoMediaTest extends UnitTest {
 
     @Test
     public void givenValidParams_whenCallsNewAudioVideo_ShouldReturnInstance() {

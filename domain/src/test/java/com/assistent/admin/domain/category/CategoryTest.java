@@ -1,11 +1,12 @@
 package com.assistent.admin.domain.category;
 
+import com.assistent.admin.domain.UnitTest;
 import com.assistent.admin.domain.exceptions.DomainException;
 import com.assistent.admin.domain.validation.handler.ThrowsValidationHandler;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class CategoryTest {
+public class CategoryTest extends UnitTest {
 
     @Test
     public void givenAValidParams_whenCallNewCategory_thenInstantiateACategory() {
