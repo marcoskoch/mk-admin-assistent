@@ -20,7 +20,7 @@ group = 'com.assistent.admin.infrastructure'
 
 bootJar {
     archiveFileName.set("application.jar")
-    destinationDirectory.set(layout.buildDirectory.dir("libs"))
+    destinationDirectory.set(rootProject.layout.buildDirectory.dir("libs"))
 }
 
 dependencies {
