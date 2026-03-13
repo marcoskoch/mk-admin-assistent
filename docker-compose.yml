@@ -1,7 +1,8 @@
 services:
   app:
     container_name: adm_videos_app
-    build: .
+    image: marcoskoch/mk-admin-assistent:develop-1
+#    build: .
     profiles: ["app"]
     restart: no
     env_file:
@@ -38,6 +39,19 @@ services:
     ports:
       - 15672:15672
       - 5672:5672
+    networks:
+      - adm_videos_network
+
+  keycloak:
+    container_name: adm_videos_keycloak
+    image: quay.io/keycloak/keycloak:20.0.3
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    ports:
+      - 8443:8080
+    command:
+      - start-dev
     networks:
       - adm_videos_network
 
