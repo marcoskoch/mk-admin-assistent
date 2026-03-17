@@ -1,5 +1,6 @@
 package com.assistent.admin.e2e.genre;
 
+import com.assistent.admin.ApiTest;
 import com.assistent.admin.E2ETest;
 import com.assistent.admin.domain.category.CategoryID;
 import com.assistent.admin.domain.genre.GenreID;
@@ -212,6 +213,7 @@ public class GenreE2ETest implements MockDsl {
         Assertions.assertEquals(0, genreRepository.count());
 
         final var aRequest = get("/genres/123")
+                .with(ApiTest.ADMIN_JWT)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON);
 
